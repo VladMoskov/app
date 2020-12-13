@@ -5,26 +5,10 @@ import ContactItem from "./ContactItem/ContactItem";
 
 const Dialogs = (props) => {
 
-    let contactItemData = [
-        {id: 1, name: 'Nic'},
-        {id: 2, name: 'Jon'},
-        {id: 3, name: 'Alibaba'},
-        {id: 4, name: 'Artur'},
-        {id: 5, name: 'Josef'}
-    ]
-
-    let messageItemData = [
-        {id: 1, message: 'message 1'},
-        {id: 2, message: 'message 2'},
-        {id: 3, message: 'message 3'},
-        {id: 4, message: 'message 4'},
-        {id: 5, message: 'message 5'}
-    ]
-
-    let ContactItems = contactItemData
+    let ContactItems = props.contactItemData
         .map(contact => <ContactItem path={'/dialogs/' + contact.id} name={contact.name}/>);
 
-    let MessagesItems = messageItemData
+    let MessagesItems = props.messageItemData
         .map(message => <Message message={message.message}/>);
 
 
