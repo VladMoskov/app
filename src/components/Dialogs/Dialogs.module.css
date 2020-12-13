@@ -1,0 +1,71 @@
+.wrapper {
+    display: grid;
+    grid-template-areas: "h h" 'd m';
+    grid-template-rows: 20px 1fr;
+    grid-template-columns: 3fr 10fr;
+    height: 100vh;
+    grid-row-gap: 10px;
+}
+
+.header {
+    grid-area: h;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 10fr;
+    border-bottom: 2px solid #a8b0f6;
+}
+
+.dialogsTitle {
+    margin-left: 30px;
+    color: #a8b0f6;
+}
+
+.messagesTitle {
+    margin-left: 30px;
+    color: #a8b0f6;
+}
+
+a {
+    text-decoration: none;
+    color: #0e4786;
+}
+
+.activeC {
+    padding-left: 30px;
+    outline: none;
+    background-color: #eae9e9;
+}
+
+.activeC:focus{
+    outline: none;
+}
+
+.dialogs {
+    grid-area: d;
+    background-color: white;
+}
+
+.dialog h2 {
+    margin-left: 30px;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 14pt;
+
+}
+
+.dialog {
+
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.messages {
+    grid-area: m;
+    background-color: #eae9e9;
+}
+
+.message {
+    width: 400px;
+    height: 100px;
+}

@@ -1,0 +1,15 @@
+.header img {
+    height: 40px;
+}
+
+.header {
+    background-color: #4f4fcb;
+    grid-area: h;
+}
+.logo {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}

@@ -1,0 +1,33 @@
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #a8b0f6;
+    height: 200px;
+    grid-area: n;
+    text-align: right;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 14pt;
+}
+
+.nav hr {
+    width: 100%;
+    border: 1px solid white;
+}
+
+.nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.activeC:focus{
+    outline: none;
+}
+
+.activeC{
+    color: #0e4786 !important;
+}
+
+.item {
+    margin-top: 15px;
+}
