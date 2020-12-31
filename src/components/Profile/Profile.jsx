@@ -1,11 +1,12 @@
 import React from 'react';
 import ProfileTopicPhoto from "./ProfileTopicPhoro/ProfileTopicPhoto";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import NewPostForm from "./NewPostForm/NewPostForm";
-import Posts from "./Posts/Posts";
 import s from './Profile.module.css';
+import NewPostFormContainer from "./NewPostForm/NewPostFormContainer";
+import PostsCintainer from "./Posts/PostsCintainer";
 
-const Profile = () => {
+const Profile = (props) => {
+;
     return (
         <div className={s.content}>
 
@@ -13,9 +14,9 @@ const Profile = () => {
 
             <ProfileInfo/>
 
-            <NewPostForm/>
+            <NewPostFormContainer store={props.store}/>
 
-            <Posts/>
+            <PostsCintainer/>
 
 
         </div>

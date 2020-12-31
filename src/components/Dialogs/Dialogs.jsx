@@ -1,15 +1,20 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import Message from "./Message/Message";
+import MessageItem from "./Message/MessageItem";
 import ContactItem from "./ContactItem/ContactItem";
+import NewMessageContainer from "./NewMessage/NewMessageContainer";
 
 const Dialogs = (props) => {
 
     let ContactItems = props.contactItemData
-        .map(contact => <ContactItem path={'/dialogs/' + contact.id} name={contact.name}/>);
+        .map(contact => <ContactItem path={'/dialogs/' + contact.id}
+                                     name={contact.name}
+                                     key={contact.id}/>);
 
     let MessagesItems = props.messageItemData
-        .map(message => <Message message={message.message}/>);
+        .map(message => <MessageItem message={message.message}
+                                     sender={message.imSender}
+                                     key={message.id}/>);
 
 
     return (
@@ -25,11 +30,14 @@ const Dialogs = (props) => {
                 {ContactItems}
 
             </div>
+            <div className={s.messagesWrapper}>
+                <div className={s.messages}>
 
-            <div className={s.messages}>
+                    { MessagesItems }
 
-                {MessagesItems}
+                </div>
 
+                <NewMessageContainer/>
             </div>
 
         </div>

@@ -3,7 +3,7 @@
     grid-template-areas: "h h" 'd m';
     grid-template-rows: 20px 1fr;
     grid-template-columns: 3fr 10fr;
-    height: 100vh;
+    max-height: calc(100vh - 100px);
     grid-row-gap: 10px;
 }
 
@@ -33,7 +33,7 @@ a {
 .activeC {
     padding-left: 30px;
     outline: none;
-    background-color: #eae9e9;
+    background-color: #f2f2f6;
 }
 
 .activeC:focus{
@@ -43,6 +43,8 @@ a {
 .dialogs {
     grid-area: d;
     background-color: white;
+    max-height: 100vh;
+    overflow: auto;
 }
 
 .dialog h2 {
@@ -53,7 +55,6 @@ a {
 }
 
 .dialog {
-
     height: 50px;
     display: flex;
     justify-content: start;
@@ -61,11 +62,41 @@ a {
 }
 
 .messages {
-    grid-area: m;
-    background-color: #eae9e9;
+    display: grid;
+    grid-row-gap: 20px;
+    overflow: auto;
 }
 
-.message {
+.messageWrapper {
     width: 400px;
     height: 100px;
+    display: grid;
+    grid-template-rows: 2fr;
+    background-color: white;
+    border: 1px solid #a8b0f6;
+    border-radius: 15px;
+    margin-left: 50px;
+
+}
+
+.right {
+    margin-left: 320px;
+}
+
+.message{
+    padding: 20px;
+}
+
+.message h1 {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 14pt;
+}
+
+.messagesWrapper {
+    max-height: calc(100vh - 100px);
+    grid-area: m;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10fr 4fr;
+    background-color: #f2f2f6;
 }

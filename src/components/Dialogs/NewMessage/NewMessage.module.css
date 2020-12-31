@@ -1,0 +1,31 @@
+.wrapper {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a8b0f6;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.container {
+    width: 90%;
+    height: 100px;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+}
+
+.textarea {
+    padding: 15px;
+    border: 1px solid #a8b0f6;
+    border-radius: 15px;
+}
+
+.button {
+    margin-top: 10px;
+    width: 80px;
+    margin-left: 606px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #a8b0f6;
+}

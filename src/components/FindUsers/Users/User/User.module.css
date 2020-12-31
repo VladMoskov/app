@@ -1,0 +1,52 @@
+.container {
+    width: 100%;
+    height: 100px;
+    background-color: #f5f3f3;
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+}
+
+.avatarImage {
+    width: calc(100% - 50px);
+    border-radius: 50%;
+}
+
+.fallowButton {
+    width: 100px;
+    height: 20px;
+    background-color: #4f4fcb;
+    border: none;
+    border-radius: 15px;
+    color: white;
+}
+
+.leftSide {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name {
+
+}
+
+.follow {
+
+}
+
+.rightSide {
+
+}
+
+.status {
+
+}
+
+.country {
+
+}
+
+.city {
+
+}
