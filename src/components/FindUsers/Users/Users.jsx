@@ -5,7 +5,6 @@ import User from "./User/User";
 
 
 const Users = (props) => {
-    debugger;
     let users = props.users.map( user => <User id={user.id}
                                                name={user.name}
                                                status={user.status}

@@ -1,30 +1,34 @@
 import React from 'react';
 import s from './User.module.css';
 
-const User = (props) => {
+class User extends React.Component {
 
-    let buttonValue = props.followed ? 'Fallow': 'Unfallow';
+    buttonValue = () => this.props.followed ? 'Fallow': 'Unfallow';
 
-    return (
-        <div>
+    render() {
+        return (
+            <div>
 
-            <div className={s.container}>
-                <div className={s.leftSide}>
-                    <img className={s.avatarImage} src={props.imgUrl} alt={}/>
-                    <div className={s.follow}>
-                        <button onClick={()=> { props.follow(props.id) }} className={s.fallowButton}>{buttonValue}</button>
+                <div className={s.container}>
+                    <div className={s.leftSide}>
+                        <img className={s.avatarImage} src={this.props.imgUrl}/>
+                        <div className={s.follow}>
+                            <button onClick={() => {
+                                this.props.follow(this.props.id)
+                            }} className={s.fallowButton}>{this.buttonValue()}</button>
+                        </div>
+                    </div>
+                    <div className={s.rightSide}>
+                        <h1 className={s.name}>{this.props.name}</h1>
+                        <h1 className={s.status}>{this.props.status}</h1>
+                        <h1 className={s.country}>{this.props.location.country}</h1>
+                        <h1 className={s.city}>{this.props.location.city}</h1>
                     </div>
                 </div>
-                <div className={s.rightSide}>
-                    <h1 className={s.name}>{props.name}</h1>
-                    <h1 className={s.status}>{props.status}</h1>
-                    <h1 className={s.country}>{props.location.country}</h1>
-                    <h1 className={s.city}>{props.location.city}</h1>
-                </div>
-            </div>
 
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 export default User;
