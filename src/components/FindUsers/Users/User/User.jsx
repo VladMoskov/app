@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './User.module.css';
+import userPhoto from './../../../../images/user.png'
 
 class User extends React.Component {
 
@@ -11,7 +12,7 @@ class User extends React.Component {
 
                 <div className={s.container}>
                     <div className={s.leftSide}>
-                        <img className={s.avatarImage} src={this.props.imgUrl}/>
+                        <img className={s.avatarImage} src={this.props.imgUrl !== null ? this.props.imgUrl: userPhoto}/>
                         <div className={s.follow}>
                             <button onClick={() => {
                                 this.props.follow(this.props.id)
@@ -21,8 +22,6 @@ class User extends React.Component {
                     <div className={s.rightSide}>
                         <h1 className={s.name}>{this.props.name}</h1>
                         <h1 className={s.status}>{this.props.status}</h1>
-                        <h1 className={s.country}>{this.props.location.country}</h1>
-                        <h1 className={s.city}>{this.props.location.city}</h1>
                     </div>
                 </div>
 
