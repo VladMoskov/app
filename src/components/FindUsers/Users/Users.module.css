@@ -9,3 +9,28 @@
     display: grid;
     grid-template-rows: 1fr 5fr;
 }
+
+span {
+    display: flex;
+    float: left;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    background-color: #a8b0f6;
+    align-items: center;
+    justify-content: center;
+}
+
+span:hover {
+    cursor: pointer;
+}
+
+.currentPage {
+
+    font-weight: 900;
+    color: #4f4fcb;
+}
+
+.pages {
+    color: white;
+}

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 
+body {
+    overflow: scroll;
+}
+
 .appWrapper {
     margin: 0 auto;
     display: grid;
@@ -11,9 +15,11 @@
     grid-gap: 10px;
 }
 
-app-wrapper-content {
+.app-wrapper-content {
     grid-area: c;
 }
+
+
 
 
 

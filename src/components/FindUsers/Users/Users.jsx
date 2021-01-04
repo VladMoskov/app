@@ -1,29 +1,35 @@
 import React from 'react';
 import s from './Users.module.css';
-import User from "./User/User";
-import * as axios from "axios";
+import preloader from "../../../images/loader.svg";
+import Preloader from "../../common/Preloader";
 
 
 const Users = (props) => {
 
-    if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(res => {
-                props.setUsers(res.data.items);
-            })
-    }
+    let count = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let users = props.users.map( user => <User id={user.id}
-                                               name={user.name}
-                                               status={user.status}
-                                               followed={user.followed}
-                                               follow={props.follow}
-                                               imgUrl={user.photos.small}/>);
+    let pages = [];
+
+    for (let i = 1; i <= count; i++) {
+        if (i > 10) {
+            break;
+        }
+        pages.push(i);
+    }
 
     return (
         <div className={s.cintainer}>
+            <div>
+                {pages.map(page => {
+                    return <span onClick={() => props.setCurrentPage(page)}
+                                 className={props.currentPage === page ? s.currentPage : s.pages}>{page}</span>
+                })}
+            </div>
+                { props.isFetching ? <Preloader /> : null }
+            <div className={s.cintainer}>
+                {props.users}
+            </div>
 
-            { users }
 
         </div>
     );

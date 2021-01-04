@@ -1,6 +1,6 @@
 import React from 'react';
-import s from './User.module.css';
 import userPhoto from './../../../../images/user.png'
+import s from "./User.module.css";
 
 class User extends React.Component {
 
