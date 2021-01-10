@@ -1,11 +1,11 @@
 import React from 'react';
-import {addPostActionCreator, updatePostTextActionCreator} from "../../../redux/Posts-reducer.jsx";
+import {addPostActionCreator, updatePostTextActionCreator} from "../../../redux/Profile-reducer.jsx";
 import NewPostForm from './NewPostForm';
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        postText: state.postsPage.postText,
+        postText: state.profilePage.postText,
     }
 }
 

@@ -1,5 +1,5 @@
 import dialogsReducer from "./Dialogs-reduсer";
-import postsReducer from "./Posts-reducer";
+import profileReducer from "./Profile-reducer";
 
 let store = {
     _state: {
@@ -50,7 +50,7 @@ let store = {
     dispatch(action) {
 
         dialogsReducer(this._state, action);
-        postsReducer(this._state, action);
+        profileReducer(this._state, action);
 
         this._rerenderEntireTree(this._state);
 

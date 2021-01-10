@@ -1,10 +1,15 @@
 .header img {
     height: 40px;
 }
-
+.header h1 {
+    color: white;
+}
 .header {
     background-color: #4f4fcb;
     grid-area: h;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .logo {
     width: 200px;
@@ -12,4 +17,8 @@
     justify-content: center;
     align-items: center;
     height: 60px;
+}
+
+.login a {
+    color: white;
 }

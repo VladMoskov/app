@@ -14,7 +14,9 @@ import Users from "./Users";
 const UsersAPI = (props) => {
 
     if (props.users.length === 0) {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`, {
+            withCredentials: true
+        })
             .then(res => {
                 props.setIsFetching();
                 props.setUser(res.data.items);
@@ -24,7 +26,9 @@ const UsersAPI = (props) => {
 
     let setCurrentPage = (page) => {
         props.setIsFetching();
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${props.pageSize}`, {
+            withCredentials: false
+        })
             .then(res => {
                 props.setUser(res.data.items);
                 props.setIsFetching();

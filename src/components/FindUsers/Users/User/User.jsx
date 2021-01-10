@@ -1,10 +1,10 @@
 import React from 'react';
 import userPhoto from './../../../../images/user.png'
 import s from "./User.module.css";
+import {NavLink} from "react-router-dom";
+import FollowButton from "../../../common/FollowButton";
 
 class User extends React.Component {
-
-    buttonValue = () => this.props.followed ? 'Fallow': 'Unfallow';
 
     render() {
         return (
@@ -12,11 +12,14 @@ class User extends React.Component {
 
                 <div className={s.container}>
                     <div className={s.leftSide}>
-                        <img className={s.avatarImage} src={this.props.imgUrl !== null ? this.props.imgUrl: userPhoto}/>
+                        <NavLink to={`/profile/` + this.props.id}>
+                            <img className={s.avatarImage}
+                                 src={this.props.imgUrl !== null ? this.props.imgUrl : userPhoto}/>
+                        </NavLink>
                         <div className={s.follow}>
-                            <button onClick={() => {
-                                this.props.follow(this.props.id)
-                            }} className={s.fallowButton}>{this.buttonValue()}</button>
+
+                            <FollowButton id={this.props.id} follow={this.props.follow} followed={this.props.followed}/>
+
                         </div>
                     </div>
                     <div className={s.rightSide}>
