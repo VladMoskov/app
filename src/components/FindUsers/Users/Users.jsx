@@ -15,7 +15,6 @@ const Users = (props) => {
         }
         pages.push(i);
     }
-
     return (
         <div className={s.cintainer}>
             <div>

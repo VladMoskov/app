@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import profileImage from '../../../images/profileImage.png';
+import FollowButton from "../../common/FollowButton";
 
 const ProfileInfo = (props) => {
     return (
@@ -8,6 +9,7 @@ const ProfileInfo = (props) => {
 
             <div>
                 <img className={s.avatar} src={props.profile.photos.large ? props.profile.photos.large : profileImage}/>
+                <FollowButton id={props.id} follow={props.follow} followed={props.followed}/>
             </div>
 
             <div className={s.AboutUserBlock}>

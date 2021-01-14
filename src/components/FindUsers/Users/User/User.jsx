@@ -18,7 +18,10 @@ class User extends React.Component {
                         </NavLink>
                         <div className={s.follow}>
 
-                            <FollowButton id={this.props.id} follow={this.props.follow} followed={this.props.followed}/>
+                            <FollowButton id={this.props.id}
+                                          follow={this.props.follow}
+                                          followed={this.props.followed}
+                                          followingInProgress={this.props.followingInProgress}/>
 
                         </div>
                     </div>

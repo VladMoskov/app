@@ -15,7 +15,7 @@ const Profile = (props) => {
 
                 <ProfileTopicPhoto/>
 
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo profile={props.profile} follow={props.follow}/>
 
                 <NewPostFormContainer store={props.store}/>
 
