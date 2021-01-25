@@ -11,6 +11,7 @@ import {Route} from "react-router-dom";
 import FindUsers from "./components/FindUsers/FindUsers";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 function App(props) {
@@ -33,6 +34,8 @@ function App(props) {
                        render ={() => <FindUsers />}/>
                 <Route path='/settings'
                        render={() => <Settings/>}/>
+                <Route path='/login'
+                       render={() => <Login/>}/>
             </div>
         </div>
     );

@@ -1,10 +1,9 @@
 import React from 'react';
-import ProfileTopicPhoto from "./ProfileTopicPhoro/ProfileTopicPhoto";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
-import NewPostFormContainer from "./NewPostForm/NewPostFormContainer";
 import PostsCintainer from "./Posts/PostsCintainer";
 import Preloader from "../common/Preloader";
+import NewPostForm from "./NewPostForm/NewPostForm";
 
 const Profile = (props) => {
     if (!props.profile){
@@ -13,14 +12,16 @@ const Profile = (props) => {
         return (
             <div className={s.content}>
 
-                <ProfileTopicPhoto/>
+                <ProfileInfo profile={props.profile}
+                             follow={props.follow}
+                             id={props.id}
+                             updateUserStatus={props.updateUserStatus}
+                             setUserStatus={props.setUserStatus}
+                             userStatus={props.userStatus}/>
 
-                <ProfileInfo profile={props.profile} follow={props.follow}/>
-
-                <NewPostFormContainer store={props.store}/>
+                <NewPostForm addNewPost={props.addNewPost}/>
 
                 <PostsCintainer/>
-
 
             </div>
         );

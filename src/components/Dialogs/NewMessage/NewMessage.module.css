@@ -16,6 +16,7 @@
 }
 
 .textarea {
+    width: 95%;
     padding: 15px;
     border: 1px solid #a8b0f6;
     border-radius: 15px;

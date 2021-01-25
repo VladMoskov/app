@@ -7,6 +7,7 @@ let mapStateToProps = (state) => {
     return {
         contactItemData: state.dialogsPage.contactItemData,
         messageItemData: state.dialogsPage.messageItemData,
+        isAuth: state.userAuth.isAuth
     }
 }
 

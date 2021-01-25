@@ -7,10 +7,9 @@ const Header = (props) => {
         <header className={s.header}>
             <div className={s.logo}>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Ubisoft_logo.svg" />
-
             </div>
             <h1>
-                { props.isAuth ? props.login : 'false'}
+                { props.isAuth ? props.login : <NavLink to='/login'>Login In</NavLink> }
             </h1>
         </header>
     );

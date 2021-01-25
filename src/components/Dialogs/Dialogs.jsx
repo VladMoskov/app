@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import MessageItem from "./Message/MessageItem";
 import ContactItem from "./ContactItem/ContactItem";
 import NewMessageContainer from "./NewMessage/NewMessageContainer";
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
 
@@ -16,6 +17,7 @@ const Dialogs = (props) => {
                                      sender={message.imSender}
                                      key={message.id}/>);
 
+    if (!props.isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={s.wrapper}>

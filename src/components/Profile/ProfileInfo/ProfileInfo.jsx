@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import profileImage from '../../../images/profileImage.png';
 import FollowButton from "../../common/FollowButton";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     return (
@@ -10,7 +11,17 @@ const ProfileInfo = (props) => {
             <div>
                 <img className={s.avatar} src={props.profile.photos.large ? props.profile.photos.large : profileImage}/>
                 <FollowButton id={props.id} follow={props.follow} followed={props.followed}/>
+
+                <div >
+                    <ProfileStatus id={props.id}
+                                   setUserStatus={props.setUserStatus}
+                                   updateUserStatus={props.updateUserStatus}
+                                   userStatus={props.userStatus}/>
+                </div>
+
             </div>
+
+
 
             <div className={s.AboutUserBlock}>
                 <h1>{ props.profile.fullName }</h1>

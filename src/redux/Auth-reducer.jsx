@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.isAuth
                 }
 
         default:
@@ -23,6 +23,6 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (data) => ({type: SET_USER_AUTH_DATA, data});
+export const setAuthUserData = (data, isAuth) => ({type: SET_USER_AUTH_DATA, data, isAuth});
 
 export default authReducer;
