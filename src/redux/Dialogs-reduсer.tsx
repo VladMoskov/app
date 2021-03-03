@@ -1,7 +1,25 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+const ADD_MESSAGE = 'Dialog-reducer/ADD-MESSAGE';
 
-let initialState = {
+
+export type contactItemDataType = {
+    id: number;
+    name: string;
+}
+
+export type messageItemDataType = {
+    id: number;
+    message: string;
+    imSender: boolean;
+}
+
+
+export type initialStateType = {
+    contactItemData: Array<contactItemDataType>;
+    messageItemData: Array<messageItemDataType>;
+}
+
+
+let initialState: initialStateType = {
     contactItemData: [
         {id: 1, name: 'Nic'},
         {id: 2, name: 'Jon'},
@@ -19,12 +37,11 @@ let initialState = {
     ],
 }
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action: any): initialStateType => {
 
     switch (action.type) {
 
         case ADD_MESSAGE: {
-            debugger
             return {
                 ...state,
                 messageItemData: [...state.messageItemData, action.message]
@@ -36,6 +53,12 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessage = (message) => ({type: ADD_MESSAGE, message})
+
+type addMessageActionType = {
+    type: typeof ADD_MESSAGE;
+    message: string;
+};
+
+export const addMessage = (message: string): addMessageActionType => ({type: ADD_MESSAGE, message});
 
 export default dialogsReducer;

@@ -9,7 +9,7 @@ const ProfileInfo = (props) => {
         <div className={s.PersonalInfoBlock}>
 
             <div>
-                <img className={s.avatar} src={props.profile.photos.large ? props.profile.photos.large : profileImage}/>
+                <img className={s.avatar} src={props.profile.photos.large ? props.profile.photos.large : profileImage} alt={""}/>
                 <FollowButton id={props.id} follow={props.follow} followed={props.followed}/>
 
                 <div >

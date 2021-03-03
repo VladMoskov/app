@@ -6,7 +6,7 @@ import authReducer from "./Auth-reducer";
 import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 
-let reducers = combineReducers({
+let rootReducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
@@ -14,10 +14,9 @@ let reducers = combineReducers({
     form: formReducer
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+type RootReducersType = typeof rootReducers;
+export type GlobalStateType = ReturnType<RootReducersType>
 
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-window.store = store;
-window.state = store.getState();
+let store = createStore(rootReducers, applyMiddleware(thunk));
 
 export default store;

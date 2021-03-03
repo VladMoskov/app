@@ -1,6 +1,5 @@
 import './App.css';
 import './Reset.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import News from "./components/News/News";
@@ -10,14 +9,15 @@ import React from "react";
 import {Route} from "react-router-dom";
 import FindUsers from "./components/FindUsers/FindUsers";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {setAuthUserData} from "./redux/Auth-reducer";
 
 
 function App(props) {
     return (
         <div className='appWrapper'>
-            <HeaderContainer/>
+            <HeaderContainer setAuthUserData={setAuthUserData}/>
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path='/dialogs'

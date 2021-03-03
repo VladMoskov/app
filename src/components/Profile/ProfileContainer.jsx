@@ -11,8 +11,6 @@ import {
 } from "../../redux/Profile-reducer";
 import {Redirect, withRouter} from "react-router-dom";
 import {follow} from "../../redux/Users-reduser";
-import {UsersAPI} from "../../API/API";
-import ProfileStatus from "./ProfileInfo/ProfileStatus";
 
 class ProfileContainer extends React.Component {
 
@@ -24,8 +22,8 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-    //    if (!this.props.isAuth)
-    //        return <Redirect to='/login'/>
+      if (!this.props.isAuth)
+            return <Redirect to='/login'/>
         return <Profile profile={this.props.profile}
                         id={this.props.id}
                         setUserStatus={this.props.setUserStatus}

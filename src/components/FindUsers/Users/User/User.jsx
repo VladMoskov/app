@@ -14,7 +14,7 @@ class User extends React.Component {
                     <div className={s.leftSide}>
                         <NavLink to={`/profile/` + this.props.id}>
                             <img className={s.avatarImage}
-                                 src={this.props.imgUrl !== null ? this.props.imgUrl : userPhoto}/>
+                                 src={this.props.imgUrl !== null ? this.props.imgUrl : userPhoto} alt={''}/>
                         </NavLink>
                         <div className={s.follow}>
 
