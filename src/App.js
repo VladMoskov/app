@@ -11,17 +11,16 @@ import FindUsers from "./components/FindUsers/FindUsers";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {setAuthUserData} from "./redux/Auth-reducer";
 
 
-function App(props) {
+function App() {
     return (
         <div className='appWrapper'>
-            <HeaderContainer setAuthUserData={setAuthUserData}/>
+            <HeaderContainer/>
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path='/dialogs'
-                       render={() => <DialogsContainer store={props.store}/>
+                       render={() => <DialogsContainer/>
                        }/>
                 <Route path='/profile/:userId?'
                        render={() => <ProfileContainer/>

@@ -1,34 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Header from "./Header";
-import {useSelector} from "react-redux";
-import {AuthAPI} from "../../API/API";
-import {useAuthUserData} from '../common/hooks';
-import {GlobalStateType} from "../../redux/redux-store";
-
-let InitialState = {
-    resultCode: 1,
-    data: {
-        id: null,
-        email: null,
-        login: null
-    }
-}
-
-type InitType = typeof InitialState
+import {useDispatch} from "react-redux";
+import {getAuthUserData} from '../../redux/Auth-reducer';
+import {useSelector} from "../common/hooks";
 
 export const HeaderContainer: React.FC = () => {
 
-    let [response, setResponse] = useState<InitType>(InitialState)
+    const dispatch = useDispatch();
 
-    const login: string | null = useSelector((state: GlobalStateType) => state.userAuth.login)
-    const isAuth: boolean = useSelector((state: GlobalStateType) => state.userAuth.isAuth)
+    const login = useSelector(state => state.userAuth.login)
+    const isAuth = useSelector(state => state.userAuth.isAuth)
 
     useEffect(() => {
-        AuthAPI.getAuth()
-            .then((res: any) => setResponse(res.data))
-    }, [])
-
-    useAuthUserData(response.data, response.resultCode)
+        dispatch(getAuthUserData())
+    })
 
     return <Header isAuth={isAuth} login={login}/>
 }

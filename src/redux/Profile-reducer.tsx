@@ -32,7 +32,7 @@ type ProfileType = {
     photos: photosType
 }
 
-export type initialState = {
+export type InitialStateType = {
     postsData: Array<postDataType>
     profile: ProfileType | null
     userStatus: string
@@ -47,7 +47,7 @@ let initialState = {
     userStatus: ''
 }
 
-const profileReducer = (state = initialState, action: any): initialState => {
+const profileReducer = (state = initialState, action: any): InitialStateType => {
 
     switch (action.type) {
 

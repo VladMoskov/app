@@ -1,10 +1,5 @@
-import {payloadType, setAuthUserData} from "../../redux/Auth-reducer";
-import {useDispatch} from "react-redux";
+import { TypedUseSelectorHook, useSelector as untypedSelector } from 'react-redux';
+import { GlobalStateType } from '../../redux/redux-store';
 
-export const useAuthUserData = (userData: payloadType, code: number) => {
 
-    const dispatch = useDispatch()
-    code === 0
-        ? dispatch(setAuthUserData(userData, true))
-        : dispatch(setAuthUserData(userData, false))
-}
+export const useSelector: TypedUseSelectorHook<GlobalStateType> = untypedSelector;
