@@ -1,27 +1,23 @@
 import React from 'react';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
-import PostsCintainer from "./Posts/PostsCintainer";
 import Preloader from "../common/Preloader";
-import NewPostForm from "./NewPostForm/NewPostForm";
+import {NewPostForm} from "./NewPostForm/NewPostForm";
+import {Posts} from "./Posts/Posts";
 
 const Profile = (props) => {
-    if (!props.profile){
+    if (!props.profile) {
         return <Preloader/>
     } else {
         return (
             <div className={s.content}>
 
-                <ProfileInfo profile={props.profile}
-                             follow={props.follow}
-                             id={props.id}
-                             updateUserStatus={props.updateUserStatus}
-                             setUserStatus={props.setUserStatus}
-                             userStatus={props.userStatus}/>
+                <ProfileInfo {...props} />
+
 
                 <NewPostForm addNewPost={props.addNewPost}/>
 
-                <PostsCintainer/>
+                <Posts/>
 
             </div>
         );

@@ -5,11 +5,19 @@ const ADD_POST = 'Profile-reducer/ADD-POST';
 const SET_USER_PROFILE = 'Profile-reducer/SET_USER_PROFILE';
 const SET_USER_STATUS = 'Profile-reducer/SET_USER_STATUS';
 
-type PostDataType = {
+type TPostsData = {
     id: number
     text: string
     likesCount: number
 }
+
+
+export type TInitialState = {
+    postsData: Array<TPostsData> | null
+    profile: IProfile | null
+    userStatus: string
+}
+
 type ContactsType = {
     github: string
     vk: string
@@ -20,12 +28,8 @@ type ContactsType = {
     youtube: string
     mainLink: string
 }
-type InitialStateType = {
-    postsData: Array<PostDataType>
-    profile: IProfile | null
-    userStatus: string
-}
-interface IProfile {
+
+export interface IProfile {
     userId: number
     lookingForAJob: string
     lookingForAJobDescription: string
@@ -37,6 +41,8 @@ interface IProfile {
     }
 }
 
+
+
 let initialState = {
     postsData: [
         {id: 1, text: 'May the force be with you', likesCount: 11},
@@ -46,7 +52,7 @@ let initialState = {
     userStatus: ''
 }
 
-const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsTypes): TInitialState => {
 
     switch (action.type) {
 
@@ -99,31 +105,35 @@ export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET
 export const setUserStatus = (status: string): SetUserStatus => ({type: SET_USER_STATUS, status});
 
 export const getUserProfile = (userId: number) => (dispatch: Dispatch<SetUserProfile>) => {
-    (ProfileAPI.getProfile(userId) as Promise<{data: IProfile}>).then(res => {
+    (ProfileAPI.getProfile(userId) as Promise<{ data: IProfile }>).then(res => {
         dispatch(setUserProfile(res.data));
     })
 }
 
 export const getUserStatus = (userId: number) => (dispatch: Dispatch<SetUserStatus>) => {
-    (ProfileAPI.getStatus(userId) as Promise<{data: string}>).then(res => {
+    (ProfileAPI.getStatus(userId) as Promise<{ data: string }>).then(res => {
         dispatch(setUserStatus(res.data));
     })
 }
 
-type UpdateStatusResponseType = {
-    resultCode: number
-    messages: Array<string>,
-    data: any
+interface IUpdateStatusResponse {
+    data: {
+        data: object,
+        messages: Array<string>,
+        fieldsErrors: Array<string>,
+        resultCode: number
+    }
 }
 
+
 export const updateUserStatus = (status: string) => (dispatch: Dispatch<SetUserStatus>) => {
-    (ProfileAPI.updateStatus(status) as Promise<UpdateStatusResponseType>)
+    (ProfileAPI.updateStatus(status) as Promise<IUpdateStatusResponse>)
         .then(res => {
-            res.resultCode === 0
-                ? dispatch(setUserStatus(status))
-                : console.log('updateUserStatus fault. ' + res.messages)
-        }
-    )
+                res.data.resultCode === 0
+                    ? dispatch(setUserStatus(status))
+                    : console.log('updateUserStatus fault. ' + res.data.messages)
+            }
+        )
 }
 
 export default profileReducer;
