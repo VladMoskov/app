@@ -22,3 +22,7 @@
 .login a {
     color: white;
 }
+
+.logo img {
+    filter: invert(100%);
+}

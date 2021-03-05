@@ -1,15 +1,16 @@
 import {ProfileAPI} from "../API/API";
+import {Dispatch} from "redux";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_STATUS = 'SET_USER_STATUS';
+const ADD_POST = 'Profile-reducer/ADD-POST';
+const SET_USER_PROFILE = 'Profile-reducer/SET_USER_PROFILE';
+const SET_USER_STATUS = 'Profile-reducer/SET_USER_STATUS';
 
-type postDataType = {
+type PostDataType = {
     id: number
     text: string
     likesCount: number
 }
-type contactsType = {
+type ContactsType = {
     github: string
     vk: string
     facebook: string
@@ -19,23 +20,21 @@ type contactsType = {
     youtube: string
     mainLink: string
 }
-type photosType = {
-    small: string
-    large: string
+type InitialStateType = {
+    postsData: Array<PostDataType>
+    profile: IProfile | null
+    userStatus: string
 }
-type ProfileType = {
+interface IProfile {
     userId: number
     lookingForAJob: string
     lookingForAJobDescription: string
     fullName: string
-    contacts: contactsType
-    photos: photosType
-}
-
-export type InitialStateType = {
-    postsData: Array<postDataType>
-    profile: ProfileType | null
-    userStatus: string
+    contacts: ContactsType
+    photos: {
+        small: string
+        large: string
+    }
 }
 
 let initialState = {
@@ -47,7 +46,7 @@ let initialState = {
     userStatus: ''
 }
 
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
 
@@ -57,7 +56,7 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
                 postsData: [
                     ...state.postsData, {
                         id: state.postsData.length,
-                        text: action.text.text,
+                        text: action.text,
                         likesCount: 0
                     }
                 ]
@@ -80,25 +79,50 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
     }
 }
 
-export const addNewPost = (text: string) => ({type: ADD_POST, text});
-export const setUserProfile = (profile: object) => ({type: SET_USER_PROFILE, profile});
-export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status});
+type ActionsTypes = AddNewPostType | SetUserProfile | SetUserStatus;
 
-export const getUserProfile = (userId: number) => (dispatch: any) => {
-    ProfileAPI.getProfile(userId).then((res: any) => {
+type AddNewPostType = {
+    type: typeof ADD_POST
+    text: string
+}
+type SetUserProfile = {
+    type: typeof SET_USER_PROFILE
+    profile: IProfile
+}
+type SetUserStatus = {
+    type: typeof SET_USER_STATUS
+    status: string
+}
+
+export const addNewPost = (text: string): AddNewPostType => ({type: ADD_POST, text});
+export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
+export const setUserStatus = (status: string): SetUserStatus => ({type: SET_USER_STATUS, status});
+
+export const getUserProfile = (userId: number) => (dispatch: Dispatch<SetUserProfile>) => {
+    (ProfileAPI.getProfile(userId) as Promise<{data: IProfile}>).then(res => {
         dispatch(setUserProfile(res.data));
     })
 }
 
-export const getUserStatus = (userId: number) => (dispatch: any) => {
-    ProfileAPI.getStatus(userId).then((res: any) => {
+export const getUserStatus = (userId: number) => (dispatch: Dispatch<SetUserStatus>) => {
+    (ProfileAPI.getStatus(userId) as Promise<{data: string}>).then(res => {
         dispatch(setUserStatus(res.data));
     })
 }
 
-export const updateUserStatus = (status: string) => (dispatch: any) => {
-    ProfileAPI.updateStatus(status).then(
-        dispatch(setUserStatus(status))
+type UpdateStatusResponseType = {
+    resultCode: number
+    messages: Array<string>,
+    data: any
+}
+
+export const updateUserStatus = (status: string) => (dispatch: Dispatch<SetUserStatus>) => {
+    (ProfileAPI.updateStatus(status) as Promise<UpdateStatusResponseType>)
+        .then(res => {
+            res.resultCode === 0
+                ? dispatch(setUserStatus(status))
+                : console.log('updateUserStatus fault. ' + res.messages)
+        }
     )
 }
 

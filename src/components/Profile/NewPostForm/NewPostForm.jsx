@@ -9,7 +9,7 @@ let maxLength10 = maxLengthCreator(10);
 const NewPostForm = (props) => {
 
     let addNewPost = (value) => {
-        props.addNewPost(value);
+        props.addNewPost(value.text);
     }
     return (
         <div className={s.postForm}>
