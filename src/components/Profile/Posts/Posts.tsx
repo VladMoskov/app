@@ -3,7 +3,6 @@ import SinglePost from "./SinglePost/SinglePost";
 import s from './Posts.module.css';
 import {useSelector} from "../../common/hooks";
 
-
 export const Posts: React.FC = () => {
 
     const posts = useSelector(state => state.profilePage.postsData);

@@ -1,4 +1,5 @@
 import {UsersAPI} from "../API/API";
+import {Reducer} from "redux";
 
 const FOLLOW_TOGGLE = 'FOLLOW-TOGGLE';
 const SET_USERS = 'SET-USERS';
@@ -8,8 +9,8 @@ const IS_FETCHING_TOGGLE = 'IS-FETCHING-TOGGLE';
 const FOLLOWING_IN_PROGRESS ='FOLLOWING_IN_PROGRESS';
 
 
-export type initialStateType = {
-    users: Array<usersType>
+export type TInitialState = {
+    users: Array<IUser>
     totalUsersCount: number
     pageSize: number
     currentPage: number
@@ -17,12 +18,12 @@ export type initialStateType = {
     followingInProgress: boolean
 }
 
-type usersType = {
+export interface IUser {
     name: string
     id: number
     photos: {
-        small: string |null
-        large: string |null
+        small: string | null
+        large: string | null
     }
     status: string | null
     followed: boolean
@@ -37,7 +38,7 @@ let initialState = {
     followingInProgress: false
 }
 
-const usersReducer = (state = initialState, action: any): initialStateType => {
+const usersReducer: Reducer<TInitialState, TActions> = (state = initialState, action: any) => {
     switch (action.type) {
 
         case FOLLOW_TOGGLE:
@@ -85,45 +86,49 @@ const usersReducer = (state = initialState, action: any): initialStateType => {
     }
 }
 
-export type followType = {
+
+type  TActions =
+    TFollow | TSetUser | TSetCurrentPage | TSetTotalUserCount | TSetIsFetching | TFollowingInProgress
+
+export type TFollow = {
     type: typeof FOLLOW_TOGGLE
     userId: number
 }
 
-export type setUserType = {
+export type TSetUser = {
     type: typeof SET_USERS
-    users: Array<usersType>
+    users: Array<IUser>
 }
 
-export type setCurrentPageType = {
+export type TSetCurrentPage = {
     type: typeof SET_CURRENT_PAGE
     page: number
 }
 
-export type setTotalUserCountType = {
+export type TSetTotalUserCount = {
     type: typeof SET_TOTAL_USERS_COUNT
     totalCount: number
 }
 
-export type setIsFetchingType = {
+export type TSetIsFetching = {
     type: typeof IS_FETCHING_TOGGLE
 }
 
-export type followingInProgressType = {
+export type TFollowingInProgress = {
     type: typeof FOLLOWING_IN_PROGRESS
 }
 
-export const follow = (userId: number):followType => ({type: FOLLOW_TOGGLE, userId});
+export const follow = (userId: number):TFollow => ({type: FOLLOW_TOGGLE, userId});
 
-export const setUser = (users: Array<usersType>):setUserType => ({type: SET_USERS, users});
+export const setUser = (users: Array<IUser>):TSetUser => ({type: SET_USERS, users});
 
-export const setCurrentPage = (page: number): setCurrentPageType => ({type: SET_CURRENT_PAGE, page});
+export const setCurrentPage = (page: number): TSetCurrentPage => ({type: SET_CURRENT_PAGE, page});
 
-export const setTotalUserCount = (totalCount: number): setTotalUserCountType => ({type: SET_TOTAL_USERS_COUNT, totalCount});
+export const setTotalUserCount = (totalCount: number): TSetTotalUserCount => ({type: SET_TOTAL_USERS_COUNT, totalCount});
 
-export const setIsFetching = (): setIsFetchingType => ({type: IS_FETCHING_TOGGLE});
+export const setIsFetching = (): TSetIsFetching => ({type: IS_FETCHING_TOGGLE});
 
-export const followingInProgress = (): followingInProgressType => ({type: FOLLOWING_IN_PROGRESS});
+export const followingInProgress = (): TFollowingInProgress => ({type: FOLLOWING_IN_PROGRESS});
 
 export default usersReducer;
 

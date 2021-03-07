@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 type TProps = {
-    setUserStatus: () => void
+    setUserStatus: (status: string) => void
     updateUserStatus: (status: string) => void
     userStatus: string
 }

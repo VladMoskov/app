@@ -1,9 +1,7 @@
 .postForm h1 {
     width: 150px;
-    height: 30px;
     display: block;
     height: 50px;
-    display: block;
     font-size: 20pt;
     font-family: 'Didact Gothic', sans-serif;
 }
@@ -16,7 +14,7 @@
     border-radius: 5px;
 }
 
-.button {
+.postForm button {
     width: 150px;
     height: 30px;
     margin-top: 25px;
@@ -24,7 +22,6 @@
     background-color: #a8b0f6;
     border-radius: 5px;
     color: white;
-    margin-left: calc(100% - 150px);
 }
 
 .hr {

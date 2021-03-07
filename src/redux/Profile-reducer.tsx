@@ -1,58 +1,53 @@
 import {ProfileAPI} from "../API/API";
-import {Dispatch} from "redux";
+import {Dispatch, Reducer} from "redux";
 
 const ADD_POST = 'Profile-reducer/ADD-POST';
 const SET_USER_PROFILE = 'Profile-reducer/SET_USER_PROFILE';
 const SET_USER_STATUS = 'Profile-reducer/SET_USER_STATUS';
 
-type TPostsData = {
-    id: number
-    text: string
-    likesCount: number
-}
+export interface IInitialState {
+    postsData: {
+            id: number
+            text: string
+            likesCount: number
+        }[]
 
-
-export type TInitialState = {
-    postsData: Array<TPostsData> | null
     profile: IProfile | null
-    userStatus: string
-}
 
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
+    userStatus: string
 }
 
 export interface IProfile {
     userId: number
-    lookingForAJob: string
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
+    lookingForAJob: string | null
+    lookingForAJobDescription: string | null
+    fullName: string | null
+
+    contacts: {
+        github: string | null
+        vk: string | null
+        facebook: string | null
+        instagram: string | null
+        twitter: string | null
+        website: string | null
+        youtube: string | null
+        mainLink: string | null
+    }
     photos: {
-        small: string
-        large: string
+        small: string | null
+        large: string | null
     }
 }
 
-
-
 let initialState = {
     postsData: [
-        {id: 1, text: 'May the force be with you', likesCount: 11},
-        {id: 2, text: 'Fallow the force', likesCount: 9}
+        {id: 1, text: 'May the force be with you', likesCount: 11}
     ],
     profile: null,
     userStatus: ''
 }
 
-const profileReducer = (state = initialState, action: ActionsTypes): TInitialState => {
+const profileReducer: Reducer<IInitialState, ActionsTypes> = (state = initialState, action: ActionsTypes) => {
 
     switch (action.type) {
 
@@ -60,7 +55,8 @@ const profileReducer = (state = initialState, action: ActionsTypes): TInitialSta
             return {
                 ...state,
                 postsData: [
-                    ...state.postsData, {
+                    ...state.postsData,
+                    {
                         id: state.postsData.length,
                         text: action.text,
                         likesCount: 0
@@ -104,13 +100,13 @@ export const addNewPost = (text: string): AddNewPostType => ({type: ADD_POST, te
 export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status: string): SetUserStatus => ({type: SET_USER_STATUS, status});
 
-export const getUserProfile = (userId: number) => (dispatch: Dispatch<SetUserProfile>) => {
+export const getUserProfile = (userId: string | undefined) => (dispatch: Dispatch<SetUserProfile>) => {
     (ProfileAPI.getProfile(userId) as Promise<{ data: IProfile }>).then(res => {
         dispatch(setUserProfile(res.data));
     })
 }
 
-export const getUserStatus = (userId: number) => (dispatch: Dispatch<SetUserStatus>) => {
+export const getUserStatus = (userId: string | undefined) => (dispatch: Dispatch<SetUserStatus>) => {
     (ProfileAPI.getStatus(userId) as Promise<{ data: string }>).then(res => {
         dispatch(setUserStatus(res.data));
     })

@@ -3,27 +3,34 @@ import s from './ProfileInfo.module.css';
 import profileImage from '../../../images/profileImage.png';
 import {ProfileStatus} from "./ProfileStatus";
 import {IProfile} from '../../../redux/Profile-reducer';
+import Preloader from "../../common/Preloader";
 
-interface TProps {
-    profile: IProfile
-    id: number
-    setUserStatus: () => void
+interface IProps {
+    profilePage: {
+        profile: IProfile | null
+        postsData: {
+            id: number
+            text: string
+            likesCount: number
+        }[]
+        userStatus: string
+    }
+    setUserStatus: (status: string) => void
     updateUserStatus: (status: string) => void
-    userStatus: string
-    addNewPost: (post: string) => void
 }
 
-export const ProfileInfo: React.FC<TProps> = (props) => {
+export const ProfileInfo: React.FC<IProps> = (props) => {
+    if (!props.profilePage.profile)
+        return <Preloader/>
 
-    let contacts = props.profile.contacts;
-
+    let contacts = props.profilePage.profile.contacts;
     return (
         <div className={s.PersonalInfoBlock}>
 
             <div>
                 <img
                     className={s.avatar}
-                    src={props.profile.photos.large ? props.profile.photos.large : profileImage}
+                    src={props.profilePage.profile.photos.large ? props.profilePage.profile.photos.large : profileImage}
                     alt={""}
                 />
 
@@ -31,7 +38,7 @@ export const ProfileInfo: React.FC<TProps> = (props) => {
                     <ProfileStatus
                         setUserStatus={props.setUserStatus}
                         updateUserStatus={props.updateUserStatus}
-                        userStatus={props.userStatus}
+                        userStatus={props.profilePage.userStatus}
                     />
                 </div>
 
@@ -39,10 +46,10 @@ export const ProfileInfo: React.FC<TProps> = (props) => {
 
 
             <div className={s.AboutUserBlock}>
-                <h1>{props.profile.fullName}</h1>
+                <h1>{props.profilePage.profile.fullName}</h1>
                 <h2><b>Looking for job: </b>{
-                    props.profile.lookingForAJob
-                        ? props.profile.lookingForAJobDescription
+                    props.profilePage.profile.lookingForAJob
+                        ? props.profilePage.profile.lookingForAJobDescription
                         : 'working'}
                 </h2>
                 <div>

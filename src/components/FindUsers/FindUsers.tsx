@@ -1,7 +1,7 @@
 import React from 'react';
-import UsersContainer from "./Users/UsersContainer";
+import {UsersContainer} from "./Users/UsersContainer";
 
-const FindUsers = (props) => {
+const FindUsers: React.FC = () => {
 
     return (
         <div>
