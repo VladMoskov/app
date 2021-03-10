@@ -1,12 +1,12 @@
 import {UsersAPI} from "../API/API";
-import {Reducer} from "redux";
+import {Dispatch, Reducer} from "redux";
 
 const FOLLOW_TOGGLE = 'FOLLOW-TOGGLE';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const IS_FETCHING_TOGGLE = 'IS-FETCHING-TOGGLE';
-const FOLLOWING_IN_PROGRESS ='FOLLOWING_IN_PROGRESS';
+const FOLLOW_IN_PROGRESS = 'FOLLOW_IN_PROGRESS'
 
 
 export type TInitialState = {
@@ -15,7 +15,7 @@ export type TInitialState = {
     pageSize: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    followInProgress: boolean
 }
 
 export interface IUser {
@@ -35,16 +35,16 @@ let initialState = {
     pageSize: 5,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false
+    followInProgress: false
 }
 
-const usersReducer: Reducer<TInitialState, TActions> = (state = initialState, action: any) => {
+const usersReducer: Reducer<TInitialState, TActions> = (state = initialState, action) => {
     switch (action.type) {
 
         case FOLLOW_TOGGLE:
             return {
                 ...state,
-                users: state.users.map((user: any) => {
+                users: state.users.map((user: IUser) => {
                     if (user.id === action.userId)
                         return {...user, followed: !user.followed}
                     return user
@@ -75,10 +75,10 @@ const usersReducer: Reducer<TInitialState, TActions> = (state = initialState, ac
                 isFetching: !state.isFetching
             }
 
-        case FOLLOWING_IN_PROGRESS:
+        case FOLLOW_IN_PROGRESS:
             return {
                 ...state,
-                followingInProgress: !state.followingInProgress
+                followInProgress: !state.followInProgress
             }
 
         default:
@@ -88,7 +88,7 @@ const usersReducer: Reducer<TInitialState, TActions> = (state = initialState, ac
 
 
 type  TActions =
-    TFollow | TSetUser | TSetCurrentPage | TSetTotalUserCount | TSetIsFetching | TFollowingInProgress
+    TFollow | TSetUser | TSetCurrentPage | TSetTotalUserCount | TSetIsFetching | TFollowInProgress
 
 export type TFollow = {
     type: typeof FOLLOW_TOGGLE
@@ -114,11 +114,13 @@ export type TSetIsFetching = {
     type: typeof IS_FETCHING_TOGGLE
 }
 
-export type TFollowingInProgress = {
-    type: typeof FOLLOWING_IN_PROGRESS
+export type TFollowInProgress = {
+    type: typeof FOLLOW_IN_PROGRESS
 }
 
-export const follow = (userId: number):TFollow => ({type: FOLLOW_TOGGLE, userId});
+export const followToggle = (userId: number):TFollow => ({type: FOLLOW_TOGGLE, userId});
+
+export const followInProgress = ():TFollowInProgress => ({type: FOLLOW_IN_PROGRESS});
 
 export const setUser = (users: Array<IUser>):TSetUser => ({type: SET_USERS, users});
 
@@ -127,8 +129,6 @@ export const setCurrentPage = (page: number): TSetCurrentPage => ({type: SET_CUR
 export const setTotalUserCount = (totalCount: number): TSetTotalUserCount => ({type: SET_TOTAL_USERS_COUNT, totalCount});
 
 export const setIsFetching = (): TSetIsFetching => ({type: IS_FETCHING_TOGGLE});
-
-export const followingInProgress = (): TFollowingInProgress => ({type: FOLLOWING_IN_PROGRESS});
 
 export default usersReducer;
 
@@ -144,3 +144,36 @@ export const getUsers = (currentPage: number, pageSize: number) => {
             })
     }
 }
+
+interface IResponse {
+        resultCode: number
+        messages: Array<string>,
+        data: object
+
+}
+
+export const follow = (userId: string) => {
+    return (dispatch: Dispatch<TFollow>) => {
+        (UsersAPI.follow(userId) as Promise<IResponse>)
+            .then(res => {
+                if (res) {
+                    dispatch(followToggle(Number(userId)))
+                    console.log('followed')
+                }
+            })
+    }
+}
+
+export const unfollow = (userId: string) => {
+    return (dispatch: Dispatch<TFollow>) => {
+        (UsersAPI.unfollow(userId) as Promise<IResponse>)
+            .then(res => {
+                console.log(res)
+                if (res) {
+                    dispatch(followToggle(Number(userId)))
+                    console.log('unfollowed')
+                }
+            })
+    }
+}
+

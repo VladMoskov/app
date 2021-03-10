@@ -11,7 +11,7 @@ export const UsersContainer: React.FC = () => {
 
     useEffect(() => {
         dispatch(getUsers(usersPage.currentPage, usersPage.pageSize));
-    }, [usersPage.currentPage, usersPage.pageSize])
+    }, [usersPage.currentPage, usersPage.pageSize, dispatch])
 
     return (
         <div>

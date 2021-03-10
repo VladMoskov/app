@@ -2,10 +2,15 @@ import React from 'react';
 import userPhoto from './../../../../images/user.png'
 import s from "./User.module.css";
 import {NavLink} from "react-router-dom";
-import FollowButton from "../../../common/FollowButton";
+import {FollowButton} from "../../../common/FollowButton";
 import {IUser} from "../../../../redux/Users-reduser";
 
-export const User: React.FC<{ user: IUser }> = (props) => {
+type TProps = {
+    user: IUser
+    followInProgress: boolean
+}
+
+export const User: React.FC<TProps> = (props) => {
 
     return (
         <div>
@@ -24,6 +29,7 @@ export const User: React.FC<{ user: IUser }> = (props) => {
                         <FollowButton
                             id={props.user.id}
                             followed={props.user.followed}
+                            followInProgress={props.followInProgress}
                         />
 
                     </div>

@@ -24,8 +24,13 @@ export const Users: React.FC<TProps> = (props) => {
         <div className={s.cintainer}>
             <div>
                 {pages.map(page => {
-                    return <span onClick={() => setCurrentPage(page)}
-                                 className={props.usersPage.currentPage === page ? s.currentPage : s.pages}>{page}</span>
+                    return <span
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={props.usersPage.currentPage === page
+                            ? s.currentPage
+                            : s.pages
+                        }>{page}</span>
                 })}
             </div>
                 { props.usersPage.isFetching ? <Preloader /> : null }
@@ -35,6 +40,7 @@ export const Users: React.FC<TProps> = (props) => {
                             <User
                                 key={user.id}
                                 user={user}
+                                followInProgress={props.usersPage.followInProgress}
                             />
                         )}
             </div>

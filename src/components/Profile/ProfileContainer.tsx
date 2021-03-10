@@ -24,7 +24,7 @@ export const ProfileContainer = () => {
     useEffect(() => {
         dispatch(getUserProfile(params.userId));
         dispatch(getUserStatus(params.userId));
-    }, [params.userId])
+    }, [params.userId, dispatch])
 
 
     if (!isAuth) return <Redirect to='/login'/>
