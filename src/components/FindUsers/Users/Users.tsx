@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Users.module.css';
-import Preloader from "../../common/Preloader";
+import {Preloader} from "../../common/Preloader";
 import User from "./User/User";
 import {setCurrentPage, TInitialState } from '../../../redux/Users-reduser';
+import {useDispatch} from "react-redux";
 
 type TProps = {
     usersPage: TInitialState
@@ -10,8 +11,9 @@ type TProps = {
 
 export const Users: React.FC<TProps> = (props) => {
 
-    let count = Math.ceil(props.usersPage.totalUsersCount / props.usersPage.pageSize);
+    const dispatch = useDispatch();
 
+    let count = Math.ceil(props.usersPage.totalUsersCount / props.usersPage.pageSize);
     let pages = [];
 
     for (let i = 1; i <= count; i++) {
@@ -26,7 +28,7 @@ export const Users: React.FC<TProps> = (props) => {
                 {pages.map(page => {
                     return <span
                         key={page}
-                        onClick={() => setCurrentPage(page)}
+                        onClick={() => dispatch(setCurrentPage(page))}
                         className={props.usersPage.currentPage === page
                             ? s.currentPage
                             : s.pages

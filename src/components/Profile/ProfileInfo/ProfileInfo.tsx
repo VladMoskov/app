@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import profileImage from '../../../images/profileImage.png';
 import {ProfileStatus} from "./ProfileStatus";
 import {IProfile} from '../../../redux/Profile-reducer';
-import Preloader from "../../common/Preloader";
+import {Preloader} from "../../common/Preloader";
 
 interface IProps {
     profilePage: {

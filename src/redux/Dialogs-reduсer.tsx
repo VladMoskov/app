@@ -1,25 +1,20 @@
+import {Reducer} from "redux";
+
 const ADD_MESSAGE = 'Dialog-reducer/ADD-MESSAGE';
 
-
-export type contactItemDataType = {
-    id: number;
-    name: string;
+type TInitialState = {
+    contactItemData: {
+        id: number
+        name: string
+    }[]
+    messageItemData: {
+        id: number;
+        message: string;
+        imSender: boolean;
+    }[]
 }
 
-export type messageItemDataType = {
-    id: number;
-    message: string;
-    imSender: boolean;
-}
-
-
-export type initialStateType = {
-    contactItemData: Array<contactItemDataType>;
-    messageItemData: Array<messageItemDataType>;
-}
-
-
-let initialState: initialStateType = {
+let initialState = {
     contactItemData: [
         {id: 1, name: 'Nic'},
         {id: 2, name: 'Jon'},
@@ -37,14 +32,18 @@ let initialState: initialStateType = {
     ],
 }
 
-const dialogsReducer = (state = initialState, action: any): initialStateType => {
+const dialogsReducer: Reducer<TInitialState, TActions> = (state = initialState, action) => {
 
     switch (action.type) {
 
         case ADD_MESSAGE: {
             return {
                 ...state,
-                messageItemData: [...state.messageItemData, action.message]
+                messageItemData: [...state.messageItemData, {
+                    id: state.messageItemData.length,
+                    message: action.message,
+                    imSender: true
+                }]
             }
         }
 
@@ -53,12 +52,13 @@ const dialogsReducer = (state = initialState, action: any): initialStateType => 
     }
 }
 
+type TActions = TAddMessageActionType
 
-type addMessageActionType = {
+type TAddMessageActionType = {
     type: typeof ADD_MESSAGE;
     message: string;
 };
 
-export const addMessage = (message: string): addMessageActionType => ({type: ADD_MESSAGE, message});
+export const addMessage = (message: string): TAddMessageActionType => ({type: ADD_MESSAGE, message});
 
 export default dialogsReducer;

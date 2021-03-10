@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import s from "../FindUsers/Users/User/User.module.css";
 import {useDispatch} from "react-redux";
-import {follow, followInProgress, unfollow} from "../../redux/Users-reduser";
+import {follow, unfollow} from '../../redux/Users-reduser';
 
 type TProps = {
     id: number
@@ -10,34 +10,21 @@ type TProps = {
 }
 
 export const FollowButton: React.FC<TProps> = (props) => {
-    
-    const ifFirstRender = useRef(true)
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (!ifFirstRender.current) {
-            if (props.followed) {
-                dispatch(unfollow(props.id.toString()))
-                dispatch(followInProgress())
-                ifFirstRender.current = true;
-            } else {
-                dispatch(follow(props.id.toString()))
-                dispatch(followInProgress())
-                ifFirstRender.current = true;
-            }
-        }
-    }, [props.id, dispatch, props.followed])
+    const dispatch = useDispatch();
 
     if (!props.followInProgress)
         return (
             <button
                 className={s.fallowButton}
                 onClick={() => {
-                    dispatch(followInProgress())
-                    ifFirstRender.current = false;
-                }}
-            > {props.followed ? '1': '2'}</button>
+                    props.followed
+                        ?dispatch(unfollow(props.id))
+                        :dispatch(follow(props.id))
+                    }
+                }
+            > {props.followed ? 'unfollow' : 'follow'}</button>
         )
     else
-        return <button className={s.fallowButton}/>
+        return <button className={s.fallowButton}>processing</button>
 }

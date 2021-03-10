@@ -1,7 +1,7 @@
 import React from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
-import Preloader from "../common/Preloader";
+import {Preloader} from "../common/Preloader";
 import {NewPostForm} from "./NewPostForm/NewPostForm";
 import {Posts} from "./Posts/Posts";
 import {IInitialState, setUserStatus, updateUserStatus} from "../../redux/Profile-reducer";
