@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Users.module.css';
 import {Preloader} from "../../common/Preloader";
 import User from "./User/User";
-import {setCurrentPage, TInitialState } from '../../../redux/Users-reduser';
+import {setCurrentPage, TInitialState} from '../../../redux/Users-reduser';
 import {useDispatch} from "react-redux";
 
 type TProps = {
@@ -29,22 +29,25 @@ export const Users: React.FC<TProps> = (props) => {
                     return <span
                         key={page}
                         onClick={() => dispatch(setCurrentPage(page))}
-                        className={props.usersPage.currentPage === page
-                            ? s.currentPage
-                            : s.pages
-                        }>{page}</span>
+                        className={
+                            props.usersPage.currentPage === page
+                                ? s.currentPage
+                                : s.pages
+                        }>
+                        {page}
+                    </span>
                 })}
             </div>
-                { props.usersPage.isFetching ? <Preloader /> : null }
+            {props.usersPage.isFetching ? <Preloader/> : null}
             <div className={s.cintainer}>
                 {props.usersPage.users
-                        .map(user =>
-                            <User
-                                key={user.id}
-                                user={user}
-                                followInProgress={props.usersPage.followInProgress}
-                            />
-                        )}
+                    .map(user =>
+                        <User
+                            key={user.id}
+                            user={user}
+                            followInProgress={props.usersPage.followInProgress}
+                        />
+                    )}
             </div>
 
 

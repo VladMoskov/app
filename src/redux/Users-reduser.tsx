@@ -135,18 +135,12 @@ export const setIsFetching = (): TSetIsFetching => ({type: IS_FETCHING_TOGGLE});
 
 export default usersReducer;
 
-type TGetUsersResponse = {
-    data: {
-        items: Array<IUser>
-        totalCount: number
-    }
-}
 
 export const getUsers = (currentPage: number, pageSize: number) => {
     return async (dispatch: Dispatch<TSetIsFetching | TSetUser | TSetTotalUserCount>) => {
         dispatch(setIsFetching());
         try {
-            const res = await (UsersAPI.getUsers(currentPage, pageSize) as Promise<TGetUsersResponse>)
+            const res = await UsersAPI.getUsers(currentPage, pageSize)
             dispatch(setIsFetching());
             dispatch(setUser(res.data.items));
             dispatch(setTotalUserCount(res.data.totalCount));
@@ -156,17 +150,13 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 }
 
-type TFollowResponse = {
-    resultCode: number
-    messages: Array<string>,
-    data: object
-}
+
 
 export const follow = (userId: number) => {
     return async (dispatch: Dispatch<TFollow | TSetFollowInProgress>) => {
         dispatch(setFollowInProgress());
         try {
-            await (UsersAPI.follow(userId) as Promise<TFollowResponse>)
+            await UsersAPI.follow(userId)
             dispatch(followToggle(userId));
             dispatch(setFollowInProgress());
             console.log('followed')
@@ -181,7 +171,7 @@ export const unfollow = (userId: number) => {
     return async (dispatch: Dispatch<TFollow | TSetFollowInProgress>) => {
         dispatch(setFollowInProgress());
         try {
-            await (UsersAPI.unfollow(userId) as Promise<TFollowResponse>)
+            await UsersAPI.unfollow(userId)
             dispatch(followToggle(userId))
             dispatch(setFollowInProgress());
             console.log('unfollowed')

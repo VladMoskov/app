@@ -7,10 +7,10 @@ const SET_USER_STATUS = 'Profile-reducer/SET_USER_STATUS';
 
 export interface IInitialState {
     postsData: {
-            id: number
-            text: string
-            likesCount: number
-        }[]
+        id: number
+        text: string
+        likesCount: number
+    }[]
 
     profile: IProfile | null
 
@@ -100,36 +100,35 @@ export const addNewPost = (text: string): AddNewPostType => ({type: ADD_POST, te
 export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status: string): SetUserStatus => ({type: SET_USER_STATUS, status});
 
-export const getUserProfile = (userId: string | undefined) => (dispatch: Dispatch<SetUserProfile>) => {
-    (ProfileAPI.getProfile(userId) as Promise<{ data: IProfile }>).then(res => {
-        dispatch(setUserProfile(res.data));
-    })
-}
-
-export const getUserStatus = (userId: string | undefined) => (dispatch: Dispatch<SetUserStatus>) => {
-    (ProfileAPI.getStatus(userId) as Promise<{ data: string }>).then(res => {
-        dispatch(setUserStatus(res.data));
-    })
-}
-
-interface IUpdateStatusResponse {
-    data: {
-        data: object,
-        messages: Array<string>,
-        fieldsErrors: Array<string>,
-        resultCode: number
+export const getUserProfile = (userId: number) =>
+    async (dispatch: Dispatch<SetUserProfile>) => {
+        try {
+            const res = await ProfileAPI.getProfile(userId)
+            dispatch(setUserProfile(res));
+        } catch (err) {
+            console.log(err.message);
+        }
     }
-}
 
+export const getUserStatus = (userId: number) =>
+    async (dispatch: Dispatch<SetUserStatus>) => {
+        try {
+            const res = await ProfileAPI.getStatus(userId);
+            dispatch(setUserStatus(res));
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
 
-export const updateUserStatus = (status: string) => (dispatch: Dispatch<SetUserStatus>) => {
-    (ProfileAPI.updateStatus(status) as Promise<IUpdateStatusResponse>)
-        .then(res => {
-                res.data.resultCode === 0
-                    ? dispatch(setUserStatus(status))
-                    : console.log('updateUserStatus fault. ' + res.data.messages)
-            }
-        )
-}
+export const updateUserStatus = (status: string) =>
+    async (dispatch: Dispatch<SetUserStatus>) => {
+        try {
+            const res = await ProfileAPI.updateStatus(status)
+            if (res.data.resultCode === 0)
+                dispatch(setUserStatus(status))
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
 
 export default profileReducer;

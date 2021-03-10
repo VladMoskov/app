@@ -1,4 +1,4 @@
-import {AuthAPI} from "../API/API";
+import {AuthAPI, UserPayloadType} from "../API/API";
 import {Dispatch} from "redux";
 
 const SET_USER_AUTH_DATA = 'Auth-reducer/SET_USER_AUTH_DATA';
@@ -34,12 +34,6 @@ const authReducer = (state = initialState, action: ActionTypes): initialStateTyp
 
 type ActionTypes = setAuthUserDataActionType
 
-export type UserPayloadType = {
-    id: number | null
-    email: string | null
-    login: string | null
-}
-
 export type setAuthUserDataActionType = {
     type: typeof SET_USER_AUTH_DATA
     payload: UserPayloadType
@@ -50,19 +44,15 @@ export const setAuthUserData = (payload: UserPayloadType, isAuth: boolean): setA
     {type: SET_USER_AUTH_DATA, payload, isAuth}
 );
 
-interface IResponse {
-    data: {
-        resultCode: number
-        messages: string[]
-        data: UserPayloadType
-    }
-}
 
-export const getAuthUserData = () => (dispatch: Dispatch<ActionTypes>) => {
-    (AuthAPI.getAuth() as Promise<IResponse>).then((res) => {
-            dispatch(setAuthUserData(res.data.data, res.data.resultCode === 0))
+export const getAuthUserData = () =>
+    async (dispatch: Dispatch<ActionTypes>) => {
+        const res = await AuthAPI.getAuth()
+        try {
+            dispatch(setAuthUserData(res.data, res.resultCode === 0))
+        } catch (err) {
+            console.log(err.message)
         }
-    )
-}
+    }
 
 export default authReducer;

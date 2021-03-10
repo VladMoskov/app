@@ -22,8 +22,8 @@ export const ProfileContainer = () => {
     const isAuth = useSelector(state => state.userAuth.isAuth)
 
     useEffect(() => {
-        dispatch(getUserProfile(params.userId));
-        dispatch(getUserStatus(params.userId));
+        dispatch(getUserProfile(Number(params.userId)));
+        dispatch(getUserStatus(Number(params.userId)));
     }, [params.userId, dispatch])
 
 
