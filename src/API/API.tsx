@@ -66,7 +66,7 @@ type TUpdateStatusResponse = {
 }
 
 export const ProfileAPI = {
-    getProfile(userId: number) {
+    getProfile(userId: number | undefined) {
         return instance.get<IProfile>(`profile/` + userId).then(res => res.data)
     },
 
@@ -76,5 +76,9 @@ export const ProfileAPI = {
 
     updateStatus(status: string) {
         return instance.put<TUpdateStatusResponse>(`profile/status`, {status})
+    },
+
+    updateProfile(profile: IProfile) {
+        return instance.put<TUpdateStatusResponse>(`profile`, profile)
     },
 }

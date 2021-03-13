@@ -17,23 +17,26 @@ export interface IInitialState {
     userStatus: string
 }
 
+export type TContacts = {
+    github: string
+    vk: string | null
+    facebook: string | null
+    instagram: string | null
+    twitter: string | null
+    website: string | null
+    youtube: string | null
+    mainLink: string | null
+}
+
 export interface IProfile {
-    userId: number
-    lookingForAJob: string | null
+    userId?: number
+    lookingForAJob: boolean
     lookingForAJobDescription: string | null
     fullName: string | null
+    aboutMe: string | null
 
-    contacts: {
-        github: string | null
-        vk: string | null
-        facebook: string | null
-        instagram: string | null
-        twitter: string | null
-        website: string | null
-        youtube: string | null
-        mainLink: string | null
-    }
-    photos: {
+    contacts: TContacts
+    photos?: {
         small: string | null
         large: string | null
     }
@@ -81,27 +84,27 @@ const profileReducer: Reducer<IInitialState, ActionsTypes> = (state = initialSta
     }
 }
 
-type ActionsTypes = AddNewPostType | SetUserProfile | SetUserStatus;
+type ActionsTypes = TAddNewPostType | TSetUserProfile | TSetUserStatus;
 
-type AddNewPostType = {
+type TAddNewPostType = {
     type: typeof ADD_POST
     text: string
 }
-type SetUserProfile = {
+type TSetUserProfile = {
     type: typeof SET_USER_PROFILE
     profile: IProfile
 }
-type SetUserStatus = {
+type TSetUserStatus = {
     type: typeof SET_USER_STATUS
     status: string
 }
 
-export const addNewPost = (text: string): AddNewPostType => ({type: ADD_POST, text});
-export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
-export const setUserStatus = (status: string): SetUserStatus => ({type: SET_USER_STATUS, status});
+export const addNewPost = (text: string): TAddNewPostType => ({type: ADD_POST, text});
+export const setUserProfile = (profile: IProfile): TSetUserProfile => ({type: SET_USER_PROFILE, profile});
+export const setUserStatus = (status: string): TSetUserStatus => ({type: SET_USER_STATUS, status});
 
 export const getUserProfile = (userId: number) =>
-    async (dispatch: Dispatch<SetUserProfile>) => {
+    async (dispatch: Dispatch<TSetUserProfile>) => {
         try {
             const res = await ProfileAPI.getProfile(userId)
             dispatch(setUserProfile(res));
@@ -111,7 +114,7 @@ export const getUserProfile = (userId: number) =>
     }
 
 export const getUserStatus = (userId: number) =>
-    async (dispatch: Dispatch<SetUserStatus>) => {
+    async (dispatch: Dispatch<TSetUserStatus>) => {
         try {
             const res = await ProfileAPI.getStatus(userId);
             dispatch(setUserStatus(res));
@@ -121,11 +124,22 @@ export const getUserStatus = (userId: number) =>
     }
 
 export const updateUserStatus = (status: string) =>
-    async (dispatch: Dispatch<SetUserStatus>) => {
+    async (dispatch: Dispatch<TSetUserStatus>) => {
         try {
             const res = await ProfileAPI.updateStatus(status)
             if (res.data.resultCode === 0)
                 dispatch(setUserStatus(status))
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+export const updateProfile = (profile: IProfile, id: number | undefined) =>
+    async (dispatch: Dispatch<TSetUserProfile>) => {
+        try {
+            await ProfileAPI.updateProfile(profile)
+            const res = await ProfileAPI.getProfile(id)
+            dispatch(setUserProfile(res))
         } catch (err) {
             console.log(err.message);
         }

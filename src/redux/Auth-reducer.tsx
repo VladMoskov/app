@@ -1,20 +1,25 @@
-import {AuthAPI, UserPayloadType} from "../API/API";
+import {AuthAPI, ProfileAPI, UserPayloadType} from "../API/API";
 import {Dispatch} from "redux";
+import {IProfile} from "./Profile-reducer";
 
 const SET_USER_AUTH_DATA = 'Auth-reducer/SET_USER_AUTH_DATA';
+const SET_USER_PROFILE = 'Auth-reducer/SET_USER_PROFILE';
 
 export type initialStateType = {
     id: number | null
     email: string | null
     login: string | null
     isAuth: boolean
+    authProfile: IProfile | null
 }
+
 
 let initialState: initialStateType = {
     id: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    authProfile: null
 }
 
 const authReducer = (state = initialState, action: ActionTypes): initialStateType => {
@@ -23,8 +28,15 @@ const authReducer = (state = initialState, action: ActionTypes): initialStateTyp
 
         case SET_USER_AUTH_DATA:
             return {
+                ...state,
                 ...action.payload,
                 isAuth: action.isAuth
+            }
+
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                authProfile: action.profile
             }
 
         default:
@@ -32,24 +44,33 @@ const authReducer = (state = initialState, action: ActionTypes): initialStateTyp
     }
 }
 
-type ActionTypes = setAuthUserDataActionType
+type ActionTypes = TSetAuthUserData | TSetUserProfile
 
-export type setAuthUserDataActionType = {
+export type TSetAuthUserData = {
     type: typeof SET_USER_AUTH_DATA
     payload: UserPayloadType
     isAuth: boolean
 }
 
-export const setAuthUserData = (payload: UserPayloadType, isAuth: boolean): setAuthUserDataActionType => (
+type TSetUserProfile = {
+    type: typeof SET_USER_PROFILE
+    profile: IProfile
+}
+
+export const setAuthUserData = (payload: UserPayloadType, isAuth: boolean): TSetAuthUserData => (
     {type: SET_USER_AUTH_DATA, payload, isAuth}
 );
 
+const setAuthUserProfile = (profile: IProfile): TSetUserProfile => ({type: SET_USER_PROFILE, profile});
+
 
 export const getAuthUserData = () =>
-    async (dispatch: Dispatch<ActionTypes>) => {
-        const res = await AuthAPI.getAuth()
+    async (dispatch: Dispatch<ActionTypes | TSetUserProfile>) => {
         try {
-            dispatch(setAuthUserData(res.data, res.resultCode === 0))
+            const res = await AuthAPI.getAuth()
+            dispatch(setAuthUserData(res.data, res.resultCode === 0));
+            const userRes = await ProfileAPI.getProfile(Number(res.data.id));
+            dispatch(setAuthUserProfile(userRes))
         } catch (err) {
             console.log(err.message)
         }

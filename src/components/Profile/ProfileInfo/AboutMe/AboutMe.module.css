@@ -1,0 +1,33 @@
+.aboutMe:hover img {
+    display: block;
+}
+
+.aboutMe {
+    display: flex;
+    flex-direction: row;
+}
+
+.aboutMe input {
+    border: none;
+    border-bottom: 1px solid #a8b0f6;
+    width: auto;
+}
+
+.aboutMe img:hover {
+    cursor: pointer;
+}
+
+.aboutMe button {
+    font-size: 7pt;
+    height: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #a8b0f6;
+    color: #fff;
+}
+.aboutMe h2 {
+    margin-left: 40px;
+    font-size: 12pt;
+    line-height: 1.2;
+    font-family: 'Didact Gothic', sans-serif;
+}

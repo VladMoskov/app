@@ -28,7 +28,7 @@ export const ProfileStatus: React.FC<TProps> = (props) => {
                 <input
                     onChange={(e) => setStatus(e.target.value)}
                     autoFocus={true}
-                    onMouseLeave={() => {
+                    onBlur={() => {
                         setEditMode(false);
                         if (status !== props.userStatus)
                             props.updateUserStatus(status); // PUT request

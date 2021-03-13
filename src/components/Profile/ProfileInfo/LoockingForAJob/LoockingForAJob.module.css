@@ -1,0 +1,27 @@
+.lookingForAJobDescription:hover img {
+    display: block;
+}
+
+.lookingForAJobDescription {
+    display: flex;
+    flex-direction: row;
+}
+
+.lookingForAJobDescription input {
+    border: none;
+    border-bottom: 1px solid #a8b0f6;
+    width: auto;
+}
+
+.lookingForAJobDescription img:hover {
+    cursor: pointer;
+}
+
+.lookingForAJobDescription button {
+    font-size: 7pt;
+    height: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #a8b0f6;
+    color: #fff;
+}

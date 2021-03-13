@@ -1,5 +1,29 @@
-.content {
-    width: 100%;
-    height: 100%;
-    background-color: #cccccc;
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    width: 900px;
+    display: grid;
+    padding-left: 40px;
+}
+
+.title {
+    display: block;
+    height: 50px;
+    font-size: 28pt;
+    font-family: 'Didact Gothic', sans-serif;
+    color: #4f4fcb;
+}
+
+.submitButton {
+    width: 100px;
+    height: 20px;
+    background-color: #4f4fcb;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin-left: 40px;
+    margin-top: 40px;
 }

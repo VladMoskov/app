@@ -4,6 +4,10 @@ import profileImage from '../../../images/profileImage.png';
 import {ProfileStatus} from "./ProfileStatus";
 import {IProfile} from '../../../redux/Profile-reducer';
 import {Preloader} from "../../common/Preloader";
+import {Contact} from "./Contacts/Contact";
+import {FullName} from "./FullName/FullName";
+import {AboutMe} from './AboutMe/AboutMe';
+import {LoockingForAJob} from './LoockingForAJob/LoockingForAJob';
 
 interface IProps {
     profilePage: {
@@ -19,18 +23,25 @@ interface IProps {
     updateUserStatus: (status: string) => void
 }
 
+type TContactsArray = {
+    [key: string]: string | null
+}
+
 export const ProfileInfo: React.FC<IProps> = (props) => {
+
     if (!props.profilePage.profile)
         return <Preloader/>
 
-    let contacts = props.profilePage.profile.contacts;
+    const {profile} = props.profilePage;
+    const contacts: TContactsArray = {...profile.contacts};
+
     return (
         <div className={s.PersonalInfoBlock}>
 
             <div>
                 <img
                     className={s.avatar}
-                    src={props.profilePage.profile.photos.large ? props.profilePage.profile.photos.large : profileImage}
+                    src={profile.photos?.large || profileImage}
                     alt={""}
                 />
 
@@ -44,28 +55,42 @@ export const ProfileInfo: React.FC<IProps> = (props) => {
 
             </div>
 
-
             <div className={s.AboutUserBlock}>
-                <h1>{props.profilePage.profile.fullName}</h1>
-                <h2><b>Looking for job: </b>{
-                    props.profilePage.profile.lookingForAJob
-                        ? props.profilePage.profile.lookingForAJobDescription
-                        : 'working'}
-                </h2>
+
+                <FullName
+                    fullName={profile.fullName}
+                />
+
+                <AboutMe
+                    aboutMe={profile.aboutMe}
+                />
+
+                <LoockingForAJob
+                    lookingForAJob={profile.lookingForAJob}
+                    lookingForAJobDescription={profile.lookingForAJobDescription}
+                />
+
                 <div>
                     <h1>Contacts</h1>
-                    <h2><i>github: </i>{contacts.github ? contacts.github : '-'}</h2>
-                    <h2><i>vk: </i>{contacts.vk ? contacts.vk : '-'}</h2>
-                    <h2><i>facebook: </i>{contacts.facebook ? contacts.facebook : '-'}</h2>
-                    <h2><i>instagram: </i>{contacts.instagram ? contacts.instagram : '-'}</h2>
-                    <h2><i>twitter: </i>{contacts.twitter ? contacts.twitter : '-'}</h2>
-                    <h2><i>website: </i>{contacts.website ? contacts.website : '-'}</h2>
-                    <h2><i>youtube: </i>{contacts.youtube ? contacts.youtube : '-'}</h2>
-                    <h2><i>mainLink: </i>{contacts.mainLink ? contacts.mainLink : '-'}</h2>
+                    {Object.keys(contacts).map((contactKey) => {
+                        return <Contact
+                            key={contactKey}
+                            contactKey={contactKey}
+                            contact={contacts[contactKey]}
+                        />
+                    })}
                 </div>
             </div>
 
         </div>
-
     );
 }
+
+
+
+
+
+
+
+
+

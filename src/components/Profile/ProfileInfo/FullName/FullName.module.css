@@ -1,0 +1,27 @@
+.foolName:hover img {
+    display: block;
+}
+
+.foolName {
+    display: flex;
+    flex-direction: row;
+}
+
+.foolName input {
+    border: none;
+    border-bottom: 1px solid #a8b0f6;
+    width: auto;
+}
+
+.foolName img:hover {
+    cursor: pointer;
+}
+
+.foolName button {
+    font-size: 7pt;
+    height: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #a8b0f6;
+    color: #fff;
+}

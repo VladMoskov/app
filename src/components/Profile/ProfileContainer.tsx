@@ -14,17 +14,20 @@ import {useDispatch} from "react-redux";
 export const ProfileContainer = () => {
 
     const dispatch = useDispatch();
+    const authUserId = useSelector(state => state.userAuth.id)
 
     const params = useParams<{ userId?: string | undefined }>()
-    if (!params.userId) params.userId = '13212';
+    if (!params.userId) params.userId = String(authUserId);
 
     const profilePage = useSelector(state => state.profilePage)
     const isAuth = useSelector(state => state.userAuth.isAuth)
 
     useEffect(() => {
-        dispatch(getUserProfile(Number(params.userId)));
-        dispatch(getUserStatus(Number(params.userId)));
-    }, [params.userId, dispatch])
+        if(isAuth) {
+            dispatch(getUserProfile(Number(params.userId)));
+            dispatch(getUserStatus(Number(params.userId)));
+        }
+    }, [params.userId, dispatch, isAuth])
 
 
     if (!isAuth) return <Redirect to='/login'/>

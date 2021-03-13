@@ -4,16 +4,24 @@ import Navbar from "./components/Navbar/Navbar";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import React from "react";
+import {Settings} from "./components/Settings/Settings";
+import React, {useEffect} from "react";
 import {Route} from "react-router-dom";
 import FindUsers from "./components/FindUsers/FindUsers";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {getAuthUserData} from "./redux/Auth-reducer";
+import {useDispatch} from "react-redux";
 
 
 function App() {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAuthUserData())
+    })
+
     return (
         <div className='appWrapper'>
             <HeaderContainer/>
