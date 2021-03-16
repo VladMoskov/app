@@ -1,0 +1,50 @@
+.modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalBox {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBox h3 {
+    font-size: 20pt;
+}
+
+.modalBox input {
+    margin: 30px;
+}
+
+.modalBox button {
+    width: 100px;
+    height: 25px;
+    background-color: #4f4fcb;
+    border: none;
+    border-radius: 15px;
+    color: white;
+}
+
+.close {
+    width: 24px !important;
+    margin-left: 450px;
+    filter: invert(100%);
+}

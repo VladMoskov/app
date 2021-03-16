@@ -18,7 +18,10 @@ export const SettingsItem: React.FC<TProps> = (props) => {
     return <div className={s.item}>
         <div className={s.name}><h1>{props.name}</h1></div>
         {!editMode
-            ? <div className={s.value}>
+            ? <div
+                onClick={() => setEditMode(true)}
+                className={s.value}
+            >
                 <h1>{inputValue || <i>no info</i>}</h1>
                 <img
                     src={edit} alt={''}

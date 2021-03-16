@@ -5,29 +5,6 @@
     width: 100%;
 }
 
-.PersonalInfoBlock input {
-    border: none;
-    border-bottom: 1px solid #a8b0f6;
-    width: auto;
-}
-
-.PersonalInfoBlock img:hover {
-    cursor: pointer;
-}
-
-.PersonalInfoBlock:hover img {
-    display: block;
-}
-
-.PersonalInfoBlock button {
-    font-size: 7pt;
-    height: 18px;
-    border: none;
-    border-radius: 5px;
-    background-color: #a8b0f6;
-    color: #fff;
-}
-
 .PersonalInfoBlock h1 {
     display: block;
     height: 50px;
@@ -55,4 +32,9 @@
 .PersonalInfoBlock i {
     font-style: italic;
     font-weight: 800;
+}
+
+.PersonalInfoBlock a {
+    margin-left: 20px;
+    text-decoration: none;
 }

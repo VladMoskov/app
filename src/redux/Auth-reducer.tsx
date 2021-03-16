@@ -13,7 +13,6 @@ export type initialStateType = {
     authProfile: IProfile | null
 }
 
-
 let initialState: initialStateType = {
     id: null,
     email: null,

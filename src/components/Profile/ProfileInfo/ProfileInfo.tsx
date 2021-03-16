@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import profileImage from '../../../images/profileImage.png';
 import {ProfileStatus} from "./ProfileStatus";
 import {IProfile} from '../../../redux/Profile-reducer';
 import {Preloader} from "../../common/Preloader";
@@ -8,6 +7,7 @@ import {Contact} from "./Contacts/Contact";
 import {FullName} from "./FullName/FullName";
 import {AboutMe} from './AboutMe/AboutMe';
 import {LoockingForAJob} from './LoockingForAJob/LoockingForAJob';
+import { Avatar } from './Avatar/Avatar';
 
 interface IProps {
     profilePage: {
@@ -39,11 +39,7 @@ export const ProfileInfo: React.FC<IProps> = (props) => {
         <div className={s.PersonalInfoBlock}>
 
             <div>
-                <img
-                    className={s.avatar}
-                    src={profile.photos?.large || profileImage}
-                    alt={""}
-                />
+                <Avatar photo={profile.photos?.large}/>
 
                 <div>
                     <ProfileStatus

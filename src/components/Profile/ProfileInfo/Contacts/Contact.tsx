@@ -7,11 +7,14 @@ type TProps = {
 }
 
 export const Contact: React.FC<TProps> = (props) => {
+
+    if (props.contact) {
         return (
             <div className={s.PersonalInfoBlock}>
                 <h2><i>{props.contactKey}: </i>
-                    <a href={`https://` + props.contact || '#'}>{props.contact || '-'}</a>
+                    <a href={`https://` + props.contact || '#'}>{props.contact}</a>
                 </h2>
             </div>
         )
+    } else return null
     }

@@ -81,4 +81,12 @@ export const ProfileAPI = {
     updateProfile(profile: IProfile) {
         return instance.put<TUpdateStatusResponse>(`profile`, profile)
     },
+
+    updateAvatar(formData: any) {
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }
 }
