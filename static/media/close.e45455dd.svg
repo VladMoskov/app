@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+	<defs>
+		<image width="64" height="64" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfiAR4SEgEKry5uAAABJUlEQVRo3s2ZyxGDMAxEd9IA5VC7O6AcOnAODpOZYMAfSS/c4LD7YLC9kiRJWpS0KvJalbQcN4s2Ze2BCKt2ZW0FodjnQIRinw+E9LmJQvjaZ2Wl3wfeCFW3OIRLpxiEWxd/hEcHX4QmdT+EZmUfhC5Ve4RuRVuEITU7hGElG4QplXmEaYU5AZNvOC5i9heNCZmuo34x852kT9BlL20XdTtN2oRdz9NncfdEcW8QkqmuTcJSZd0oNFefzWJjfQUh2P6MEG5/hRBZ3FYQhu1fkdR+7/8HfwC2BsKXIbwRwVsxfBjBxzEcSOBIBodSOJbDhQlcmsHFKVyeww0KuEUDN6ngNh3cqIRbtXCzGm7XwwMLeGQDD63wsR0+uMRHt/jwuiBg4/s3F+xMfOSiOYcAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMDEtMzBUMTg6MTg6MDErMDE6MDBM3GPtAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTAxLTMwVDE4OjE4OjAxKzAxOjAwPYHbUQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+	</style>
+	<g id="заявка создание">
+		<g id="шапка">
+			<use id="close" href="#img1" transform="matrix(0.25,0,0,0.25,0,0)"/>
+		</g>
+	</g>
+</svg>
