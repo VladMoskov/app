@@ -27,21 +27,21 @@ function App() {
             <HeaderContainer/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path='/dialogs'
+                <Route path="/dialogs"
                        render={() => <DialogsContainer/>
                        }/>
-                <Route path='/profile/:userId?'
+                <Route path="/profile/:userId?"
                        render={() => <ProfileContainer/>
                        }/>
-                <Route path='/news'
+                <Route path="/news"
                        render={() => <News/>}/>
-                <Route path='/music'
+                <Route path="/music"
                        render={() => <Music/>}/>
-                <Route path='/find-users'
+                <Route path="/find-users"
                        render ={() => <FindUsers />}/>
-                <Route path='/settings'
+                <Route path="/settings"
                        render={() => <Settings/>}/>
-                <Route path='/login'
+                <Route path="/login"
                        render={() => <Login/>}/>
             </div>
         </div>
