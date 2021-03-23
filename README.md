@@ -9,7 +9,7 @@ After 2.0 will make some chenges with autorization, dialogs and other. Sometimes
 
 Used server API: https://docs.google.com/document/d/1ZSXmTzkgq_Kj1VbWuq8fTv_DPD95GFDvPZgqFeIYGoM/edit# 
 
-The project uses cookies. 
+The project use cookies. 
 Authorization process is under development. 
 So for testing application you must be authorize on https://social-network.samuraijs.com/
 
