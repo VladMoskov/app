@@ -1,6 +1,7 @@
 gh-pages: https://vladmoskov.github.io/app/
 
 This is my firs project - Social network.
+
 Made with course "React - way of samurai 1.0/2.0" in IT-KAMASUTRA(https://www.youtube.com/channel/UCTW0FUhT0m-Bqg2trTbSs0g)
 
 After 1.0 project was refactored to functional components hooks and typescript on my own.  
