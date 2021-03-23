@@ -43,7 +43,7 @@ const authReducer = (state = initialState, action: ActionTypes): initialStateTyp
     }
 }
 
-type ActionTypes = TSetAuthUserData | TSetUserProfile
+type ActionTypes = TSetAuthUserData | TSetAuthUserProfile
 
 export type TSetAuthUserData = {
     type: typeof SET_USER_AUTH_DATA
@@ -51,7 +51,7 @@ export type TSetAuthUserData = {
     isAuth: boolean
 }
 
-type TSetUserProfile = {
+export type TSetAuthUserProfile = {
     type: typeof SET_USER_PROFILE
     profile: IProfile
 }
@@ -60,11 +60,11 @@ export const setAuthUserData = (payload: UserPayloadType, isAuth: boolean): TSet
     {type: SET_USER_AUTH_DATA, payload, isAuth}
 );
 
-const setAuthUserProfile = (profile: IProfile): TSetUserProfile => ({type: SET_USER_PROFILE, profile});
+export const setAuthUserProfile = (profile: IProfile): TSetAuthUserProfile => ({type: SET_USER_PROFILE, profile});
 
 
 export const getAuthUserData = () =>
-    async (dispatch: Dispatch<ActionTypes | TSetUserProfile>) => {
+    async (dispatch: Dispatch<ActionTypes | TSetAuthUserProfile>) => {
         try {
             const res = await AuthAPI.getAuth()
             dispatch(setAuthUserData(res.data, res.resultCode === 0));

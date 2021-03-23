@@ -1,12 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from "../common/hooks";
 import {getUserProfile, IProfile, updateProfile} from "../../redux/Profile-reducer";
 import {useDispatch} from "react-redux";
 import {Preloader} from "../common/Preloader";
 import s from './Settings.module.css';
 import {SettingsItem} from "./SettingsItem/SettingsItem";
+import loading from './../../images/loader.svg';
 
 export const Settings: React.FC = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch();
     const profile = useSelector(state => state.userAuth.authProfile)
@@ -23,12 +26,10 @@ export const Settings: React.FC = () => {
 
     const setField = (name: string, inputValue: string | null, isContact: boolean): IProfile => {
         if (!isContact) {
-            newProfile = {...profile, [name]: inputValue, lookingForAJob: true};
-            console.log(newProfile);
+            newProfile = {...newProfile, [name]: inputValue, lookingForAJob: true};
             return newProfile
         } else {
-            newProfile = {...profile, contacts: {...profile?.contacts, [name]: inputValue}};
-            console.log(newProfile);
+            newProfile = {...newProfile, contacts: {...newProfile?.contacts, [name]: inputValue}};
             return newProfile
         }
     }
@@ -68,8 +69,12 @@ export const Settings: React.FC = () => {
 
         <button
             className={s.submitButton}
-            onClick={() => dispatch(updateProfile(newProfile, Number(authUserId)))}
-        >Save
+            onClick={() => {
+                setIsLoading(true)
+                dispatch(updateProfile(newProfile, Number(authUserId)))
+                setIsLoading(false)
+            }}
+        >Save {isLoading && <img alt={''} src={loading} className={s.loading}/>}
         </button>
 
     </div>

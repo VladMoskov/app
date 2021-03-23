@@ -1,5 +1,5 @@
 {
-  "homepage": "https://vladmoskov.github.io/app",
+  "homepage": "https://vladmoskov.github.io/app/",
   "name": "app",
   "version": "0.1.0",
   "private": true,
@@ -16,11 +16,9 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-form": "^8.3.1",
     "axios": "^0.21.1",
-    "final-form": "^4.20.1",
     "formik": "^2.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-final-form": "^6.5.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
@@ -59,5 +57,4 @@
   "devDependencies": {
     "gh-pages": "^3.1.0"
   }
-
 }

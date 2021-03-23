@@ -13,7 +13,7 @@ type TProps = {
 export const SettingsItem: React.FC<TProps> = (props) => {
 
     const [editMode, setEditMode] = useState(false);
-    const [inputValue, setInputValue] = useState(props.itemValue || '');
+    const [inputValue, setInputValue] = useState(props.itemValue);
 
     return <div className={s.item}>
         <div className={s.name}><h1>{props.name}</h1></div>
@@ -35,7 +35,7 @@ export const SettingsItem: React.FC<TProps> = (props) => {
                     setEditMode(false);
                     props.setField(props.name, inputValue, props.isContact)
                 }}
-                onChange={(e) => setInputValue(e.target.value || '')}
+                onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue || ''}
             />}
     </div>

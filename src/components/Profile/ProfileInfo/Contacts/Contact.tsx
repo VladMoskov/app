@@ -17,4 +17,4 @@ export const Contact: React.FC<TProps> = (props) => {
             </div>
         )
     } else return null
-    }
+}

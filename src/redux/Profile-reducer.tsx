@@ -1,5 +1,6 @@
 import {ProfileAPI} from "../API/API";
 import {Dispatch, Reducer} from "redux";
+import { setAuthUserProfile, TSetAuthUserProfile } from "./Auth-reducer";
 
 const ADD_POST = 'Profile-reducer/ADD-POST';
 const SET_USER_PROFILE = 'Profile-reducer/SET_USER_PROFILE';
@@ -135,11 +136,12 @@ export const updateUserStatus = (status: string) =>
     }
 
 export const updateProfile = (profile: IProfile, id: number | undefined) =>
-    async (dispatch: Dispatch<TSetUserProfile>) => {
+    async (dispatch: Dispatch<TSetUserProfile | TSetAuthUserProfile>) => {
         try {
             await ProfileAPI.updateProfile(profile)
             const res = await ProfileAPI.getProfile(id)
             dispatch(setUserProfile(res))
+            dispatch(setAuthUserProfile(res))
         } catch (err) {
             console.log(err.message);
         }
