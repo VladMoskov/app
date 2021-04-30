@@ -1,4 +1,4 @@
-gh-pages: https://vladmoskov.github.io/app/
+gh-pages: https://vladmoskov.github.io/social-network/
 
 This is my firs project - Social network.
 
