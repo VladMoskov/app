@@ -1,5 +1,6 @@
 
 This is my firs project - Social network.
+pages: https://vladrassokhyn.github.io/social-network/
 
 Made with course "React - way of samurai 1.0/2.0" in IT-KAMASUTRA(https://www.youtube.com/channel/UCTW0FUhT0m-Bqg2trTbSs0g)
 
